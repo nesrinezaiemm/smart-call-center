@@ -2,6 +2,8 @@ package tn.esprit.zaiem_nesrine_arctic10.services;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.zaiem_nesrine_arctic10.dto.ProjectMapper;
+import tn.esprit.zaiem_nesrine_arctic10.dto.ProjectsDTO;
 import tn.esprit.zaiem_nesrine_arctic10.entities.Agent;
 import tn.esprit.zaiem_nesrine_arctic10.entities.Project;
 import tn.esprit.zaiem_nesrine_arctic10.repositories.IProjectRepository;
@@ -15,7 +17,7 @@ import tn.esprit.zaiem_nesrine_arctic10.repositories.IAgentRepository;
 public class ProjectServicesImpl implements IProjectServices{
 
     private final IProjectRepository projectRepository;
-
+    private final ProjectMapper projectMapper;
     @Override
     public Project addProject(Project project) {
         return projectRepository.save(project);
@@ -62,5 +64,18 @@ public class ProjectServicesImpl implements IProjectServices{
         return projectRepository.save(project);
 
     }
+    public ProjectsDTO getProjectsDetails(Project project) {
+        ProjectsDTO projectsDTO = new ProjectsDTO();
+        projectsDTO.setProjectid(project.getProjectsId());
+        projectsDTO.setProjectName(project.getLibelle());
+        projectsDTO.setClientName(project.getProjectDetails().getClient());
+        return projectsDTO;
+    }
+    public ProjectsDTO findProjects(long projectId){
+        Project aProject = projectRepository.findById(projectId).orElseThrow(() -> new EntityNotFoundException("Project not found"));
+        return projectMapper.toDTO(aProject);
+    }
+
+
 
 }

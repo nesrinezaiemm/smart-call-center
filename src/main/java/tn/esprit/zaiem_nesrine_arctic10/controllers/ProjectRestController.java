@@ -2,6 +2,7 @@ package tn.esprit.zaiem_nesrine_arctic10.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.zaiem_nesrine_arctic10.dto.ProjectsDTO;
 import tn.esprit.zaiem_nesrine_arctic10.entities.Project;
 import tn.esprit.zaiem_nesrine_arctic10.entities.Agent;
 import tn.esprit.zaiem_nesrine_arctic10.services.IProjectServices;
@@ -47,4 +48,16 @@ public class ProjectRestController {
     public Project assignToAgents(@PathVariable Long projectId, @PathVariable Long agentsId) {
         return projectServices.assignToAgents(projectId , agentsId);
     }
+    @GetMapping("/{id}/details")
+    public ProjectsDTO getProjectsDetails(@PathVariable Long id) {
+        // fetch the FULL project from DB first
+        Project project = projectServices.getProjectById(id);// ← not new Projects()
+        return projectServices.getProjectsDetails(project);
+    }
+
+    @GetMapping("{id}")
+    public ProjectsDTO findProjects(@PathVariable long id) {
+        return projectServices.findProjects(id);
+    }
+
 }

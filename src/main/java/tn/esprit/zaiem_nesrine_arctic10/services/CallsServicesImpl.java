@@ -3,6 +3,11 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.zaiem_nesrine_arctic10.entities.*;
+import tn.esprit.zaiem_nesrine_arctic10.entities.AISystem;
+import tn.esprit.zaiem_nesrine_arctic10.entities.Agent;
+import tn.esprit.zaiem_nesrine_arctic10.entities.CallSkills;
+import tn.esprit.zaiem_nesrine_arctic10.entities.CallStatus;
+import tn.esprit.zaiem_nesrine_arctic10.entities.Calls;
 import tn.esprit.zaiem_nesrine_arctic10.repositories.IAISystemRepository;
 import tn.esprit.zaiem_nesrine_arctic10.repositories.IAgentRepository;
 import tn.esprit.zaiem_nesrine_arctic10.repositories.ICallsRepository;
@@ -16,6 +21,7 @@ public class CallsServicesImpl implements ICallsServices{
 
     private final ICallsRepository callsRepository;
     private final IAgentRepository agentRepository;
+
 
 //    @Autowired
 //    public void setCallsRepository(ICallsRepository callsRepository) {
@@ -152,4 +158,63 @@ public class CallsServicesImpl implements ICallsServices{
             }
         }
     }
+    @Override
+    public List<Calls> findByStatusAndAssignedAgent_AgentsId(CallStatus status, long agentId) {
+        return callsRepository.findByStatusAndAssignedAgent_AgentsId(status, agentId);
+    }
+
+    @Override
+    public List<Calls> findByStatus(CallStatus status) {
+        return callsRepository.findByStatus(status);
+    }
+
+    @Override
+    public List<Calls> findByAssignedAgentIsNull() {
+        return callsRepository.findByAssignedAgentIsNull();
+    }
+
+    @Override
+    public List<Calls> findByRequiredSkillsContains(CallSkills skill) {
+        return callsRepository.findByRequiredSkillsContains(skill);
+    }
+
+    @Override
+    public List<Calls> findTop5ByRequiredSkillsContainsOrderByCallsDateTimeAsc(CallSkills skill) {
+        return callsRepository.findTop5ByRequiredSkillsContainsOrderByCallsDateTimeAsc(skill);
+    }
+
+    @Override
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        return callsRepository.existsByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public long countByStatus(CallStatus status) {
+        return callsRepository.countByStatus(status);
+    }
+    @Override
+    public List<Calls> findCallsByAgent(Long idAgent) {
+        return callsRepository.findCallsByAgent(idAgent);
+    }
+
+    @Override
+    public List<Calls> findCallsBySkill(CallSkills skill) {
+        return callsRepository.findCallsBySkill(skill);
+    }
+
+    @Override
+    public List<Object[]> countCallsByStatus() {
+        return callsRepository.countCallsByStatus();
+    }
+
+    @Override
+    public List<Object[]> findTopActiveAgents() {
+        return callsRepository.findTopActiveAgents();
+    }
+
+    @Override
+    public List<Calls> findTodayCalls() {
+        return callsRepository.findTodayCalls();
+    }
+
 }

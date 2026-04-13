@@ -2,6 +2,7 @@ package tn.esprit.zaiem_nesrine_arctic10.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +28,7 @@ public class Agent {
     Set<CallSkills> skills = new HashSet<>();
 
     boolean available;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "assignedAgent")
     Set<Calls> calls ;
 
