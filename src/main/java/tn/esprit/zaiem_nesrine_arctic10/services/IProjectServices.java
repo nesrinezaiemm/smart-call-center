@@ -18,4 +18,7 @@ public interface IProjectServices {
     Project assignToAgents(Long projectId, Long agentsId);
     ProjectsDTO getProjectsDetails(Project projects);
     ProjectsDTO findProjects(long projectId);
+    Double getSumProjectByAgent(String agentName);
+    void sumProjectsByAgents();
 }
+

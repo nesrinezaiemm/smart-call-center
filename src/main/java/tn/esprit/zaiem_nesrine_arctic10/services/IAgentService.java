@@ -16,4 +16,7 @@ public interface IAgentService {
     List<Agent> getAvailableAgentsWithSkills(Set<CallSkills> skills);
     List<Agent> findAgentsBySkill(CallSkills skill);
     List<Agent> findMostCompetentAgentForCall(Long callsId);
+    List<Agent> findAgentsByClientName(String clientName);
+
+
 }

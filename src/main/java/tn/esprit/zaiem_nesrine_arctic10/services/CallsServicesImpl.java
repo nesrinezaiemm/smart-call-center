@@ -216,5 +216,8 @@ public class CallsServicesImpl implements ICallsServices{
     public List<Calls> findTodayCalls() {
         return callsRepository.findTodayCalls();
     }
-
+    @Override
+    public List<Calls> getCallsByProjectLibelle(String libelle) {
+        return callsRepository.getCallsByProjectLibelle(libelle);
+    }
 }

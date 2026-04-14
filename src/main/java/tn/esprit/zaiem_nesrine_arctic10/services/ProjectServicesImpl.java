@@ -1,23 +1,29 @@
 package tn.esprit.zaiem_nesrine_arctic10.services;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.zaiem_nesrine_arctic10.dto.ProjectMapper;
 import tn.esprit.zaiem_nesrine_arctic10.dto.ProjectsDTO;
 import tn.esprit.zaiem_nesrine_arctic10.entities.Agent;
 import tn.esprit.zaiem_nesrine_arctic10.entities.Project;
+import tn.esprit.zaiem_nesrine_arctic10.repositories.IProjectDetailsRepository;
 import tn.esprit.zaiem_nesrine_arctic10.repositories.IProjectRepository;
 import java.util.List;
 import tn.esprit.zaiem_nesrine_arctic10.entities.Calls;
 import tn.esprit.zaiem_nesrine_arctic10.entities.Agent; // not Agents
 import tn.esprit.zaiem_nesrine_arctic10.repositories.ICallsRepository;
 import tn.esprit.zaiem_nesrine_arctic10.repositories.IAgentRepository;
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProjectServicesImpl implements IProjectServices{
 
     private final IProjectRepository projectRepository;
     private final ProjectMapper projectMapper;
+    private final IProjectDetailsRepository iProjectDetailsRepository;
+
     @Override
     public Project addProject(Project project) {
         return projectRepository.save(project);
@@ -74,6 +80,22 @@ public class ProjectServicesImpl implements IProjectServices{
     public ProjectsDTO findProjects(long projectId){
         Project aProject = projectRepository.findById(projectId).orElseThrow(() -> new EntityNotFoundException("Project not found"));
         return projectMapper.toDTO(aProject);
+    }
+    public Double getSumProjectByAgent(String agentName){
+        return iProjectDetailsRepository.sumOfBudgetByAgentName(agentName);
+    }
+
+    @Scheduled(fixedRate = 600000)
+    @Override
+    public void sumProjectsByAgents(){
+
+        log.info("SumProjectsByAgents");
+        log.warn("warn");
+        try{
+
+        } catch(Exception e) {
+            log.error("error : " +e.getMessage());
+        }
     }
 
 

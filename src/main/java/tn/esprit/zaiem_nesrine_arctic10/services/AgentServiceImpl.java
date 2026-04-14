@@ -83,4 +83,10 @@ public class AgentServiceImpl implements IAgentService {
     public List<Agent> findMostCompetentAgentForCall(Long callsId) {
         return agentRepository.findMostCompetentAgentForCall(callsId);
     }
+
+    @Override
+    public List<Agent> findAgentsByClientName(String clientName) {
+        return agentRepository.findAgentsByClientName(clientName);
+    }
+
 }

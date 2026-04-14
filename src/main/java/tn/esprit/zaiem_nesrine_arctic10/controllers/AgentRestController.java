@@ -56,4 +56,12 @@ public class AgentRestController {
     public List<Agent> findMostCompetentAgentForCall(@PathVariable Long callsId) {
         return agentService.findMostCompetentAgentForCall(callsId);
     }
+   // @GetMapping("byClient/{client}")
+    //public List<Agent> findAgentsByClient(@PathVariable String client) {
+      //  return agentService.findAgentsByClient(client);
+    //}
+    //@GetMapping("sumBudget/{name}")
+    //public Double getSumBudgetByAgentName(@PathVariable String name) {
+      //  return agentService.getSumBudgetByAgentName(name);
+    //}
 }

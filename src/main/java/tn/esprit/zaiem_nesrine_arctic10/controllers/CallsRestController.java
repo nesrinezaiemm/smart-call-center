@@ -136,5 +136,9 @@ long countByStatus(@PathVariable CallStatus status) {
     public List<Calls> findTodayCalls() {
         return callsServices.findTodayCalls();
     }
+    @GetMapping("byProject/{libelle}")
+    public List<Calls> getCallsByProjectLibelle(@PathVariable String libelle) {
+        return callsServices.getCallsByProjectLibelle(libelle);
+    }
 }
 

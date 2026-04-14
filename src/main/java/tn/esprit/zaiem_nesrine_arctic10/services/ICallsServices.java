@@ -33,4 +33,5 @@ public interface ICallsServices {
     List<Object[]> countCallsByStatus();
     List<Object[]> findTopActiveAgents();
     List<Calls> findTodayCalls();
+    List<Calls> getCallsByProjectLibelle(String libelle);
 }
